@@ -46,6 +46,7 @@ void MainWindow::setTableEntite(QString nom){
             else {
                 QSqlQuery query,quer;
                 QString q = "SELECT * FROM entite WHERE nom LIKE '";
+                QString nomEntite,nomResponsable;
                 q.append(nom);
                 q.append("'");
                     query.exec(q);
@@ -53,6 +54,10 @@ void MainWindow::setTableEntite(QString nom){
 
                     while(query.next()) {
                         id = query.value(0).toString();
+                        nomEntite=query.value(1).toString();
+                        nomResponsable=query.value(2).toString();
+                        ui->nomEntiteLab->setText(nomEntite);
+                        ui->nomRespLab->setText(nomResponsable);
                     }
 
                 q = "SELECT  id_rubrique,budget,consomme FROM budget WHERE id_entite='";
@@ -69,11 +74,10 @@ void MainWindow::setTableEntite(QString nom){
                         consomme = query.value(2).toString();
 
 
-                        std::ostringstream out;
-                        int i = query.value(1).toInt()- query.value(2).toInt();
-                        out<<i;
-                        std::string t=out.str();
-                       restant= t;
+
+                        restant = QString::number( query.value(1).toInt()- query.value(2).toInt());
+
+
                      QString req= "SELECT nom FROM rubrique WHERE id='";
 
                      req.append(rubrique);
