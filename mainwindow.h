@@ -16,7 +16,9 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
+
+    void on_comboBox_3_currentIndexChanged(const QString &arg1);
+    void setTableEntite(QString nom);
 
 private:
     Ui::MainWindow *ui;

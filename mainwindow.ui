@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
-    <height>481</height>
+    <width>722</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="BarreOutils">
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>60</y>
-      <width>641</width>
+      <y>50</y>
+      <width>661</width>
       <height>361</height>
      </rect>
     </property>
@@ -40,7 +40,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Budget Total Engagé :</string>
+       <string>Entité :</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
@@ -53,7 +53,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Budget Total Consommé :</string>
+       <string>Rubrique :</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
@@ -66,26 +66,104 @@
        </rect>
       </property>
       <property name="text">
-       <string>Budget Total Restant :</string>
+       <string>Responsable :</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tableWidget_3">
+     <widget class="QComboBox" name="comboBox_3">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Entite</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBox_4">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>50</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_5">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>80</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>300</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>300</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Quitter</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>120</y>
-        <width>256</width>
+        <y>130</y>
+        <width>591</width>
+        <height>151</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabEntite">
+     <attribute name="title">
+      <string>Entités</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableEntite">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>130</y>
+        <width>511</width>
         <height>192</height>
        </rect>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>63</number>
+       <number>166</number>
       </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>20</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>19</number>
+       <number>27</number>
       </attribute>
       <column>
        <property name="text">
@@ -94,143 +172,61 @@
       </column>
       <column>
        <property name="text">
-        <string>BT</string>
+        <string>Budget consommé</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>BR</string>
+        <string>Busget Restant</string>
        </property>
       </column>
-      <column>
-       <property name="text">
-        <string>BC</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget_4">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>120</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>63</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>20</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>19</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Entité</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BT</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BR</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BC</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label_21">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>20</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nombre de devis : xxx</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_22">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>40</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Devis en attente : xxx</string>
-      </property>
-     </widget>
-     <widget class="QTimeEdit" name="timeEdit">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>70</y>
-        <width>118</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>Gestion d'Entité</string>
-     </attribute>
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>113</width>
-        <height>20</height>
-       </rect>
-      </property>
      </widget>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>100</y>
-        <width>81</width>
-        <height>20</height>
+        <x>50</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Nom de l'entité :</string>
+       <string>Nom de l'Entité :</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QLabel" name="nomEntiteLab">
       <property name="geometry">
        <rect>
-        <x>490</x>
-        <y>20</y>
-        <width>75</width>
-        <height>23</height>
+        <x>140</x>
+        <y>30</y>
+        <width>121</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Afficher</string>
+       <string/>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>20</y>
-        <width>113</width>
-        <height>20</height>
+        <x>50</x>
+        <y>60</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nom du Responsable :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nomRespLab">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>60</y>
+        <width>121</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
@@ -240,463 +236,161 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>20</y>
-        <width>101</width>
-        <height>20</height>
+        <x>410</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Nom de l'entité :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>140</y>
-        <width>111</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom du reponsable :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>140</y>
-        <width>113</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>20</y>
-        <width>131</width>
-        <height>22</height>
-       </rect>
+       <string>Budget Global :</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>20</y>
-        <width>21</width>
-        <height>20</height>
+        <x>410</x>
+        <y>60</y>
+        <width>101</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>ou</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Modifier</string>
+       <string>Budget Consommé :</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_8">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>260</y>
+        <x>410</x>
+        <y>90</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget Restant :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bdgGlobEntite">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>30</y>
         <width>121</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Total : xxxx DH</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>60</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>63</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>20</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>19</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Rubrique</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BT</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BR</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BC</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>280</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Consommé : xxxx DH</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>300</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Restant : xxxx DH</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Gestion de Rubrique</string>
-     </attribute>
-     <widget class="QComboBox" name="comboBox_2">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>20</y>
-        <width>131</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>490</x>
-        <y>20</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Afficher</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_4">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>20</y>
-        <width>113</width>
-        <height>20</height>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="bdgConsEntite">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>20</y>
+        <x>520</x>
+        <y>60</y>
         <width>121</width>
-        <height>20</height>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Nom de la rubrique :</string>
+       <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_12">
+     <widget class="QLabel" name="bdgRestEntite">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>20</y>
-        <width>21</width>
-        <height>20</height>
+        <x>530</x>
+        <y>90</y>
+        <width>121</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>ou</string>
+       <string/>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_5">
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>Administration</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_9">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>140</y>
-        <width>113</width>
-        <height>20</height>
+        <x>240</x>
+        <y>160</y>
+        <width>75</width>
+        <height>23</height>
        </rect>
       </property>
+      <property name="text">
+       <string>Connecter</string>
+      </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QLabel" name="label_26">
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
+        <y>120</y>
+        <width>81</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Modifier</string>
+       <string>Mot de passe :</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QLabel" name="label_27">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
+        <x>110</x>
+        <y>10</y>
+        <width>441</width>
+        <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Ajouter</string>
+       <string>Bienvenue dans l'espace d'administration</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
+     <widget class="QLineEdit" name="lineEdit_9">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>100</y>
+        <x>270</x>
+        <y>120</y>
         <width>113</width>
         <height>20</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_13">
+     <widget class="QLineEdit" name="lineEdit_10">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>140</y>
-        <width>111</width>
+        <x>270</x>
+        <y>90</y>
+        <width>113</width>
         <height>20</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Budget Total Engagé :</string>
-      </property>
      </widget>
-     <widget class="QLabel" name="label_14">
+     <widget class="QLabel" name="label_28">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>100</y>
-        <width>111</width>
-        <height>20</height>
+        <x>170</x>
+        <y>90</y>
+        <width>46</width>
+        <height>13</height>
        </rect>
       </property>
       <property name="text">
-       <string>Nom de la rubrique :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_15">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>260</y>
-        <width>121</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Total : xxxx DH</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>280</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Consommé : xxxx DH</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>300</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Budget Restant : xxxx DH</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>60</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>63</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>20</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>19</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Entité</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BT</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BR</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>BC</string>
-       </property>
-      </column>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>Gestion des commandes</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_5">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>120</y>
-        <width>521</width>
-        <height>192</height>
-       </rect>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>103</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Entite</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Rubrique</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Devis</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Budget</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Status</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label_18">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>30</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nombre de devis : xxx</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_19">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>50</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Devis en attente : xxx</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_20">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>70</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Devis validés : xxx</string>
+       <string>Login :</string>
       </property>
      </widget>
     </widget>
@@ -727,10 +421,40 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>738</width>
+     <width>722</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEdition">
+    <property name="title">
+     <string>Edition</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuA_Propos">
+    <property name="title">
+     <string>A Propos</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuOutils">
+    <property name="title">
+     <string>Outils</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuEdition"/>
+   <addaction name="menuA_Propos"/>
+   <addaction name="menuOutils"/>
+   <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
