@@ -31,6 +31,8 @@ void MainWindow::on_comboBox_3_currentIndexChanged(const QString &arg1)
 }
 
 void MainWindow::setTableEntite(QString nom){
+    // Vider le tableau
+    for(int i=0;i<ui->tableEntite->verticalHeader()->count();i++) ui->tableEntite->removeRow(i);
 
     ui->tableEntite->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -66,16 +68,18 @@ void MainWindow::setTableEntite(QString nom){
                 q.append("'");
                     query.exec(q);
                     int count=0;
-                    QString nom,rubrique, budget, consomme,restant="";
+                    QString nom,rubrique, budget, consomme,restant;
+                    int budgetGlob=0,budgetCons=0,budgetRest=0;
                     while(count<query.size()) {
                         query.next();
                         rubrique = query.value(0).toString();
                         budget = query.value(1).toString();
                         consomme = query.value(2).toString();
-
-
-
                         restant = QString::number( query.value(1).toInt()- query.value(2).toInt());
+
+                        budgetGlob += query.value(1).toInt();
+                        budgetCons += query.value(2).toInt();
+                        budgetRest += query.value(1).toInt()- query.value(2).toInt();
 
 
                      QString req= "SELECT nom FROM rubrique WHERE id='";
@@ -102,6 +106,10 @@ void MainWindow::setTableEntite(QString nom){
                         ui->tableEntite->setItem(count,3,br);
                         count++;
                     }
+
+                    ui->bdgGlobEntite->setText(QString::number(budgetGlob));
+                    ui->bdgConsEntite->setText(QString::number(budgetCons));
+                    ui->bdgRestEntite->setText(QString::number(budgetRest));
 
 
             }
