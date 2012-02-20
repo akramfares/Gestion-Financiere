@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -155,12 +155,12 @@
        <rect>
         <x>70</x>
         <y>130</y>
-        <width>511</width>
+        <width>541</width>
         <height>192</height>
        </rect>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>166</number>
+       <number>127</number>
       </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
        <number>27</number>
@@ -172,12 +172,17 @@
       </column>
       <column>
        <property name="text">
+        <string>Budget total</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Budget consommé</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Busget Restant</string>
+        <string>Budget Restant</string>
        </property>
       </column>
      </widget>

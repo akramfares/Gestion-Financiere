@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <sstream>
 #include "ui_mainwindow.h"
 #include <QtSql/QSqlDatabase>
 #include <QSqlQuery>
@@ -43,38 +44,58 @@ void MainWindow::setTableEntite(QString nom){
                                       db.lastError().text());
             }
             else {
-                QSqlQuery query;
+                QSqlQuery query,quer;
                 QString q = "SELECT * FROM entite WHERE nom LIKE '";
                 q.append(nom);
                 q.append("'");
                     query.exec(q);
                     QString id;
+
                     while(query.next()) {
                         id = query.value(0).toString();
                     }
 
-                q = "SELECT id_rubrique,budget,consomme FROM budget WHERE id_entite='";
+                q = "SELECT  id_rubrique,budget,consomme FROM budget WHERE id_entite='";
+
                 q.append(id);
                 q.append("'");
                     query.exec(q);
                     int count=0;
-                    QString rubrique, budget, consomme;
-                    while(count<query.size()-1) {
+                    QString nom,rubrique, budget, consomme,restant="";
+                    while(count<query.size()) {
                         query.next();
                         rubrique = query.value(0).toString();
                         budget = query.value(1).toString();
                         consomme = query.value(2).toString();
 
+
+                        std::ostringstream out;
+                        int i = query.value(1).toInt()- query.value(2).toInt();
+                        out<<i;
+                        std::string t=out.str();
+                       restant= t;
+                     QString req= "SELECT nom FROM rubrique WHERE id='";
+
+                     req.append(rubrique);
+                     req.append("'");
+                         quer.exec(req);quer.next();
+                         nom= quer.value(0).toString();
+
+
+
                         ui->tableEntite->insertRow(count);
                         QTableWidgetItem *r = new QTableWidgetItem;
-                        r->setText(rubrique);
-                        ui->tableEntite->setItem(0,0,r);
+                        r->setText(nom);
+                        ui->tableEntite->setItem(count,0,r);
+                        QTableWidgetItem *bt = new QTableWidgetItem;
+                        bt->setText(budget);
+                        ui->tableEntite->setItem(count,1,bt);
                         QTableWidgetItem *bc = new QTableWidgetItem;
-                        bc->setText(budget);
-                        ui->tableEntite->setItem(0,1,bc);
+                        bc->setText(consomme);
+                        ui->tableEntite->setItem(count,2,bc);
                         QTableWidgetItem *br = new QTableWidgetItem;
-                        br->setText(consomme);
-                        ui->tableEntite->setItem(0,2,br);
+                        br->setText(restant);
+                        ui->tableEntite->setItem(count,3,br);
                         count++;
                     }
 
