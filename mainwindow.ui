@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -74,7 +74,7 @@
        <rect>
         <x>120</x>
         <y>20</y>
-        <width>69</width>
+        <width>141</width>
         <height>22</height>
        </rect>
       </property>
@@ -89,22 +89,27 @@
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="comboBox_4">
+     <widget class="QComboBox" name="comboRubrique">
       <property name="geometry">
        <rect>
         <x>120</x>
         <y>50</y>
-        <width>69</width>
+        <width>141</width>
         <height>22</height>
        </rect>
       </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
      </widget>
      <widget class="QComboBox" name="comboBox_5">
       <property name="geometry">
        <rect>
         <x>120</x>
         <y>80</y>
-        <width>69</width>
+        <width>141</width>
         <height>22</height>
        </rect>
       </property>
@@ -153,7 +158,7 @@
      <widget class="QTableWidget" name="tableEntite">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>60</x>
         <y>130</y>
         <width>541</width>
         <height>192</height>
@@ -172,12 +177,12 @@
       </column>
       <column>
        <property name="text">
-        <string>Budget total</string>
+        <string>Budget Total</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Budget consommé</string>
+        <string>Budget Consommé</string>
        </property>
       </column>
       <column>
@@ -317,11 +322,180 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tabRubrique">
+     <attribute name="title">
+      <string>Rubrique</string>
+     </attribute>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nom de la Rubrique :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nomRubrique">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>30</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>60</y>
+        <width>46</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="budgetRubrique">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>60</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>30</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget alloué 
+aux Entités :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>60</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget consommé :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>90</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Budget restant :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bdgGlobRubrique">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>40</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bdgConsRubrique">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>70</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="bdgRestRubrique">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>90</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableRubrique">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>541</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>127</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Entité</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Budget Alloué</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Budget Consommé</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Budget Restant</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
       <string>Administration</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_9">
+     <widget class="QPushButton" name="adminConnect">
       <property name="geometry">
        <rect>
         <x>240</x>
