@@ -11,9 +11,41 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    rubrique.cpp \
+    admindialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    rubrique.h \
+    admindialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    admindialog.ui
 QT      +=sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <sstream>
 #include "ui_mainwindow.h"
+#include "rubrique.h"
 #include <QtSql/QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -13,7 +14,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Suppression des onglets : Entité & Rubrique
     ui->BarreOutils->removeTab(1);
+    ui->BarreOutils->removeTab(1);
+
+    // Connexion à la base de données
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("gestionfinanciere");
+    db.setUserName("root");
+    db.setPassword("");
+
+    // Initialisation des combos
+    initCombos();
 }
 
 MainWindow::~MainWindow()
@@ -21,24 +34,41 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initCombos(){
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text());
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT nom FROM rubrique";
+            query.exec(q);
+
+            while(query.next()) {
+                ui->comboRubrique->addItem(query.value(0).toString());
+            }
+    }
+}
 
 void MainWindow::on_comboBox_3_currentIndexChanged(const QString &arg1)
 {
-    QMessageBox::information(0, QObject::tr("Ajouter une Entité"),arg1);
+    // Connexion à la base de données
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("gestionfinanciere");
+    db.setUserName("root");
+    db.setPassword("");
+
     ui->BarreOutils->insertTab(1,ui->tabEntite,"Entité");
     ui->BarreOutils->setCurrentIndex(1);
     setTableEntite(arg1);
 }
 
 void MainWindow::setTableEntite(QString nom){
+    // Vider le tableau
+    for(int i=0;i<ui->tableEntite->verticalHeader()->count();i++) ui->tableEntite->removeRow(i);
 
     ui->tableEntite->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-
-            db.setHostName("localhost");
-            db.setDatabaseName("gestionfinanciere");
-            db.setUserName("root");
-            db.setPassword("");
             if (!db.open()){
                 QMessageBox::critical(0, QObject::tr("Database Error"),
                                       db.lastError().text());
@@ -66,16 +96,18 @@ void MainWindow::setTableEntite(QString nom){
                 q.append("'");
                     query.exec(q);
                     int count=0;
-                    QString nom,rubrique, budget, consomme,restant="";
+                    QString nom,rubrique, budget, consomme,restant;
+                    int budgetGlob=0,budgetCons=0,budgetRest=0;
                     while(count<query.size()) {
                         query.next();
                         rubrique = query.value(0).toString();
                         budget = query.value(1).toString();
                         consomme = query.value(2).toString();
-
-
-
                         restant = QString::number( query.value(1).toInt()- query.value(2).toInt());
+
+                        budgetGlob += query.value(1).toInt();
+                        budgetCons += query.value(2).toInt();
+                        budgetRest += query.value(1).toInt()- query.value(2).toInt();
 
 
                      QString req= "SELECT nom FROM rubrique WHERE id='";
@@ -103,7 +135,42 @@ void MainWindow::setTableEntite(QString nom){
                         count++;
                     }
 
+                    ui->bdgGlobEntite->setText(QString::number(budgetGlob));
+                    ui->bdgConsEntite->setText(QString::number(budgetCons));
+                    ui->bdgRestEntite->setText(QString::number(budgetRest));
+
 
             }
+}
 
+void MainWindow::on_comboRubrique_currentIndexChanged(const QString &arg1)
+{
+    ui->BarreOutils->insertTab(1,ui->tabRubrique,"Rubrique");
+    ui->BarreOutils->setCurrentIndex(1);
+    setTableRubrique(arg1);
+}
+
+void MainWindow::setTableRubrique(QString nom){
+    Rubrique *rubrique = new Rubrique(nom);
+
+    // Nom Rubrique
+    ui->nomRubrique->setText(nom);
+    //Budget Rubrique
+    ui->budgetRubrique->setText(rubrique->getBudget());
+    // Budget alloué
+    ui->bdgGlobRubrique->setText(rubrique->getBudgetGlob());
+    // Budget consommé
+    ui->bdgConsRubrique->setText(rubrique->getBudgetCons());
+    // Budget Restant
+    ui->bdgRestRubrique->setText(rubrique->getBudgetRest());
+    // Tableau des Entités en relation avec la Rubrique
+    rubrique->setTable(ui->tableRubrique);
+
+}
+
+
+void MainWindow::on_adminConnect_clicked()
+{
+    AdminDialog ad;
+    ad.exec();
 }
