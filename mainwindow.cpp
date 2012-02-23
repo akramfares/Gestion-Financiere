@@ -26,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     db.setPassword("");
 
     // Initialisation des combos
-    initCombos();
+    Rubrique *r = new Rubrique("");
+    r->initComboAll(ui->comboRubrique);
 }
 
 MainWindow::~MainWindow()
@@ -34,21 +35,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initCombos(){
-    if (!db.open()){
-        QMessageBox::critical(0, QObject::tr("Database Error"),
-                              db.lastError().text());
-    }
-    else {
-        QSqlQuery query;
-        QString q = "SELECT nom FROM rubrique";
-            query.exec(q);
 
-            while(query.next()) {
-                ui->comboRubrique->addItem(query.value(0).toString());
-            }
-    }
-}
 
 void MainWindow::on_comboBox_3_currentIndexChanged(const QString &arg1)
 {

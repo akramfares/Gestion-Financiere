@@ -28,6 +28,7 @@ QString Rubrique::getId(){
                 return query.value(0).toString();
             }
     }
+    return "";
 }
 
 QString Rubrique::getBudget(){
@@ -43,6 +44,7 @@ QString Rubrique::getBudget(){
             while(query.next()) {
                 return query.value(0).toString();
             }
+            return "";
     }
 }
 
@@ -151,6 +153,92 @@ QString Rubrique::getNomEntite(QString id)
                 return query.value(0).toString();
             }
     }
+    return "";
 }
 
+void Rubrique::initComboAll(QComboBox *combo){
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("gestionfinanciere");
+    db.setUserName("root");
+    db.setPassword("");
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text() + " Combo");
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT nom FROM rubrique";
+            query.exec(q);
+
+            while(query.next()) {
+                combo->addItem(query.value(0).toString());
+            }
+    }
+}
+
+void Rubrique::initComboEntite(QComboBox *combo){
+    combo->addItem("");
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text() + " Combo");
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT nom FROM entite";
+            query.exec(q);
+
+            while(query.next()) {
+                combo->addItem(query.value(0).toString());
+            }
+    }
+}
+
+void Rubrique::addRubrique(QString nom, QString budget)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Add");
+        return;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "INSERT INTO rubrique VALUES('','"+nom+"','"+budget+"')";
+            query.exec(q);
+            return;
+    }
+}
+
+void Rubrique::editRubrique(QString rubrique, QString nom, QString budget)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Edit");
+        return;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "UPDATE rubrique SET nom='"+nom+"', budget='"+budget+"' WHERE nom LIKE '"+rubrique+"'";
+            query.exec(q);
+            return;
+    }
+}
+
+bool Rubrique::exists()
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Exist");
+        return true;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT id FROM rubrique WHERE nom LIKE '"+nom+"'";
+            query.exec(q);
+            while(query.next()) {
+                return true;
+            }
+    }
+    return false;
+}
 

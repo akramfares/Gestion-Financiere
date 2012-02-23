@@ -21,10 +21,7 @@ private slots:
     void on_comboBox_3_currentIndexChanged(const QString &arg1);
     void setTableEntite(QString nom);
     void setTableRubrique(QString nom);
-    void initCombos();
-
     void on_comboRubrique_currentIndexChanged(const QString &arg1);
-
     void on_adminConnect_clicked();
 
 private:
