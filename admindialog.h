@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <rubrique.h>
-#include <entite.h>
 
 namespace Ui {
     class AdminDialog;
