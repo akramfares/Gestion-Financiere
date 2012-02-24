@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <rubrique.h>
+#include <entite.h>
 
 namespace Ui {
     class AdminDialog;
@@ -23,6 +24,12 @@ private slots:
     void on_addButtonRubrique_clicked();
 
     void on_editButtonRubrique_clicked();
+
+    void on_delButtonRubrique_clicked();
+
+    void on_comboEntiteRubrique_currentIndexChanged(const QString &arg1);
+
+    void on_addBudgetRubrique_clicked();
 
 private:
     Ui::AdminDialog *ui;

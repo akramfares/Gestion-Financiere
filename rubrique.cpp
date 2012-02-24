@@ -14,6 +14,7 @@ Rubrique::Rubrique(QString nom)
     this->budgetCons = 0;
 }
 
+// Retourne l'id de la rubrique
 QString Rubrique::getId(){
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
@@ -31,6 +32,7 @@ QString Rubrique::getId(){
     return "";
 }
 
+// Retourne le budget de la rubrique
 QString Rubrique::getBudget(){
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
@@ -48,6 +50,7 @@ QString Rubrique::getBudget(){
     }
 }
 
+// Retourne le budget global alloué aux entités
 QString Rubrique::getBudgetGlob(){
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
@@ -66,6 +69,7 @@ QString Rubrique::getBudgetGlob(){
 
 }
 
+// Retourne le Budget consommé par les entités
 QString Rubrique::getBudgetCons(){
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
@@ -84,10 +88,12 @@ QString Rubrique::getBudgetCons(){
 
 }
 
+// Retourne le Budget restant des entités
 QString Rubrique::getBudgetRest(){
     return QString::number(budgetGlob - budgetCons);
 }
 
+// Initalise le tableau des Entités relatives à une rubrique
 void Rubrique::setTable(QTableWidget *table)
 {
     // Initialisations
@@ -138,6 +144,7 @@ void Rubrique::setTable(QTableWidget *table)
 
 }
 
+// Retourne le nom d'une entité
 QString Rubrique::getNomEntite(QString id)
 {
     if (!db.open()){
@@ -156,6 +163,7 @@ QString Rubrique::getNomEntite(QString id)
     return "";
 }
 
+// Initialise un comboBox contenant toutes les rubriques
 void Rubrique::initComboAll(QComboBox *combo){
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
@@ -177,8 +185,15 @@ void Rubrique::initComboAll(QComboBox *combo){
     }
 }
 
+// Initialise un comboBox contenant toutes les entités
 void Rubrique::initComboEntite(QComboBox *combo){
+    combo->clear();
     combo->addItem("");
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("gestionfinanciere");
+    db.setUserName("root");
+    db.setPassword("");
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
                               db.lastError().text() + " Combo");
@@ -194,6 +209,7 @@ void Rubrique::initComboEntite(QComboBox *combo){
     }
 }
 
+// Bouton ajouter une rubrique
 void Rubrique::addRubrique(QString nom, QString budget)
 {
     if (!db.open()){
@@ -209,6 +225,7 @@ void Rubrique::addRubrique(QString nom, QString budget)
     }
 }
 
+// Bouton éditer une rubrique
 void Rubrique::editRubrique(QString rubrique, QString nom, QString budget)
 {
     if (!db.open()){
@@ -224,6 +241,23 @@ void Rubrique::editRubrique(QString rubrique, QString nom, QString budget)
     }
 }
 
+// Bouton supprimer une rubrique
+void Rubrique::deleteRubrique(QString nom)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Delete");
+        return;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "DELETE FROM rubrique WHERE nom LIKE '"+nom+"'";
+            query.exec(q);
+            return;
+    }
+}
+
+// Retourne si une rubrique existe ou pas
 bool Rubrique::exists()
 {
     if (!db.open()){
@@ -241,4 +275,77 @@ bool Rubrique::exists()
     }
     return false;
 }
+
+// Retourne le budget d'une rubrique d'une entité
+QString Rubrique::getBudgetParEntite(QString entite, QPushButton *bouton)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text() + " Budget par Entité");
+        return "";
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT budget FROM budget WHERE id_entite='"+getIdEntite(entite)+"' AND id_rubrique='"+id+"'";
+            query.exec(q);
+            while(query.next()) {
+                bouton->setText("Modifier Budget");
+                return query.value(0).toString();
+            }
+    }
+    bouton->setText("Ajouter Budget");
+    return "";
+}
+
+// Retourne l'id d'une entité
+QString Rubrique::getIdEntite(QString nom){
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Id");
+        return "";
+    }
+    else {
+        QSqlQuery query;
+        QString q = "SELECT id FROM entite WHERE nom LIKE '"+nom+"'";
+            query.exec(q);
+            while(query.next()) {
+                return query.value(0).toString();
+            }
+    }
+    return "";
+
+}
+
+// Ajoute le budget d'une rubrique d'une entité
+void Rubrique::addBudgetEntite(QString nom, QString budget)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Add Budget Entite");
+        return;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "INSERT INTO budget VALUES('','"+getIdEntite(nom)+"','"+id+"','"+budget+"','0')";
+            query.exec(q);
+            return;
+    }
+}
+
+// Edite le budget d'une rubrique d'une entité
+void Rubrique::editBudgetEntite(QString nom, QString budget)
+{
+    if (!db.open()){
+        QMessageBox::critical(0, QObject::tr("Database Error"),
+                              db.lastError().text()+" Edit Budget Entite");
+        return;
+    }
+    else {
+        QSqlQuery query;
+        QString q = "UPDATE budget SET budget='"+budget+"' WHERE id_entite='"+getIdEntite(nom)+"' AND id_rubrique='"+id+"'";
+            query.exec(q);
+            return;
+    }
+}
+
 
