@@ -12,6 +12,8 @@
 #include <QHeaderView>
 #include <QComboBox>
 #include <QPushButton>
+#include <QGroupBox>
+#include <QLabel>
 
 class Rubrique
 {
@@ -25,7 +27,7 @@ public:
     QString getBudgetCons();
     QString getBudgetRest();
     QString getNomEntite(QString id);
-    QString getBudgetParEntite(QString entite, QPushButton *bouton);
+    QString getBudgetParEntite(QString entite, QPushButton *bouton, QGroupBox *group, QLabel *idBudget);
     QString getIdEntite(QString nom);
     void setTable(QTableWidget *table);
     void initComboAll(QComboBox *combo);

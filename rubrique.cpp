@@ -277,7 +277,7 @@ bool Rubrique::exists()
 }
 
 // Retourne le budget d'une rubrique d'une entité
-QString Rubrique::getBudgetParEntite(QString entite, QPushButton *bouton)
+QString Rubrique::getBudgetParEntite(QString entite, QPushButton *bouton, QGroupBox *group, QLabel *idBudget)
 {
     if (!db.open()){
         QMessageBox::critical(0, QObject::tr("Database Error"),
@@ -286,13 +286,17 @@ QString Rubrique::getBudgetParEntite(QString entite, QPushButton *bouton)
     }
     else {
         QSqlQuery query;
-        QString q = "SELECT budget FROM budget WHERE id_entite='"+getIdEntite(entite)+"' AND id_rubrique='"+id+"'";
+        QString q = "SELECT budget,id FROM budget WHERE id_entite='"+getIdEntite(entite)+"' AND id_rubrique='"+id+"'";
             query.exec(q);
             while(query.next()) {
+                idBudget->setText(query.value(1).toString());
+                group->show();
                 bouton->setText("Modifier Budget");
                 return query.value(0).toString();
             }
     }
+    idBudget->setText("");
+    group->hide();
     bouton->setText("Ajouter Budget");
     return "";
 }

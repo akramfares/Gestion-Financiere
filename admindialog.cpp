@@ -17,6 +17,15 @@ AdminDialog::AdminDialog(QWidget *parent) :
     Rubrique *rubrique = new Rubrique("");
     ui->comboSearchRubrique->addItem("");
     rubrique->initComboAll(ui->comboSearchRubrique);
+
+    // On masque le formulaire de consommation
+    ui->groupConsommation->hide();
+    // On masque l'idBudget
+    ui->idBudget->hide();
+
+    // Mise à jour des infos généraux
+    General *general = new General();
+    general->updateInfos(ui->etablissement,ui->bdgGlobal,ui->login);
 }
 
 AdminDialog::~AdminDialog()
@@ -45,6 +54,13 @@ void AdminDialog::on_addButtonRubrique_clicked()
                               "Veuillez ajouter un budget de Rubrique !");
         return;
     }
+    bool ok;
+    ui->bdgTotalRubrique->text().toInt(&ok);
+    if(!ok){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter un budget valide !");
+        return;
+    }
     if(rubrique->exists()){
         QMessageBox::critical(0, QObject::tr("Erreur"),
                               "Cette Rubrique éxiste déjà !");
@@ -58,6 +74,9 @@ void AdminDialog::on_addButtonRubrique_clicked()
     // On positionne le curseur sur la nouvelle Rubrique
     int ci = ui->comboSearchRubrique->count();
     ui->comboSearchRubrique->setCurrentIndex(ci - 1);
+
+    QMessageBox::information(0, QObject::tr("Rubrique"),
+                          "Rubrique ajoutée avec succès !");
 }
 // Editer une Rubrique
 void AdminDialog::on_editButtonRubrique_clicked()
@@ -79,11 +98,22 @@ void AdminDialog::on_editButtonRubrique_clicked()
         return;
     }
 
+    bool ok;
+    ui->bdgTotalRubrique->text().toInt(&ok);
+    if(!ok){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter un budget valide !");
+        return;
+    }
+
     // On ajoute la rubrique à la base de données
     rubrique->editRubrique(ui->comboSearchRubrique->currentText(), ui->nomRubrique->text(), ui->bdgTotalRubrique->text());
     //On modifie le nom de la Rubrique dans le ComboBox
     int ci = ui->comboSearchRubrique->currentIndex();
     ui->comboSearchRubrique->setItemText(ci,ui->nomRubrique->text());
+
+    QMessageBox::information(0, QObject::tr("Rubrique"),
+                          "Rubrique modifiée avec succès !");
 }
 // Bouton supprimer
 void AdminDialog::on_delButtonRubrique_clicked()
@@ -110,6 +140,9 @@ void AdminDialog::on_delButtonRubrique_clicked()
     ui->nomRubrique->setText("");
     ui->bdgTotalRubrique->setText("");
 
+    QMessageBox::information(0, QObject::tr("Rubrique"),
+                          "Rubrique supprimée avec succès !");
+
 }
 // Quand on choisi une entité de rubrique
 void AdminDialog::on_comboEntiteRubrique_currentIndexChanged(const QString &arg1)
@@ -117,7 +150,7 @@ void AdminDialog::on_comboEntiteRubrique_currentIndexChanged(const QString &arg1
     // Si une entité est sélectionnée
     if(ui->comboSearchRubrique->currentIndex()!=0){
         Rubrique *rubrique = new Rubrique(ui->comboSearchRubrique->currentText());
-        QString budget = rubrique->getBudgetParEntite(arg1, ui->addBudgetRubrique);
+        QString budget = rubrique->getBudgetParEntite(arg1, ui->addBudgetRubrique, ui->groupConsommation, ui->idBudget);
         // On modifie le champ budget par entité
         ui->bdgParEntite->setText(budget);
     }
@@ -125,6 +158,14 @@ void AdminDialog::on_comboEntiteRubrique_currentIndexChanged(const QString &arg1
 // Bouton ajouter un budget par entité
 void AdminDialog::on_addBudgetRubrique_clicked()
 {
+    bool ok;
+    ui->bdgParEntite->text().toInt(&ok);
+    if(!ok){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter un budget valide !");
+        return;
+    }
+
     // Si une rubrique et une entité sont sélectionnés
     if(ui->comboSearchRubrique->currentIndex()!=0 && ui->comboEntiteRubrique->currentIndex()!=0){
         Rubrique *rubrique = new Rubrique(ui->comboSearchRubrique->currentText());
@@ -137,6 +178,9 @@ void AdminDialog::on_addBudgetRubrique_clicked()
         else if(ui->addBudgetRubrique->text()=="Modifier Budget"){
             rubrique->editBudgetEntite(ui->comboEntiteRubrique->currentText(), ui->bdgParEntite->text());
         }
+
+        QMessageBox::information(0, QObject::tr("Rubrique"),
+                              "Budget ajouté avec succès !");
     }
     else {
         if(ui->comboSearchRubrique->currentText().isEmpty()){
@@ -145,4 +189,47 @@ void AdminDialog::on_addBudgetRubrique_clicked()
             return;
         }
     }
+}
+// Bouton pour ajouter une consommation
+void AdminDialog::on_saveButtonCons_clicked()
+{
+    if(ui->consommation->text().isEmpty()){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter une consommation !");
+        return;
+    }
+    bool ok;
+    ui->consommation->text().toInt(&ok);
+    if(!ok){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter une consommation valide !");
+        return;
+    }
+
+    if(ui->fournisseur->text().isEmpty()){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Veuillez ajouter un fournisseur !");
+        return;
+    }
+
+    // Vérification de la condition de validation
+    Consommation *consom = new Consommation(ui->idBudget->text());
+    if(!consom->isValid(ui->consommation->text())){
+        QMessageBox::critical(0, QObject::tr("Erreur"),
+                              "Vous avez atteint la limite de consommation !");
+        return;
+    }
+
+    QMessageBox::information(0, QObject::tr("Consommation"),
+                          "Consommation ajoutée avec succès !");
+    // Ajout de la consommation
+    consom->addConsommation(ui->consommation->text(), ui->fournisseur->text(), ui->commentaire->toPlainText());
+}
+
+void AdminDialog::on_saveGeneral_clicked()
+{
+    General *general = new General();
+    general->setInfos(ui->etablissement->text(),ui->bdgGlobal->text(),ui->login->text(),ui->newPassword->text());
+    QMessageBox::information(0, QObject::tr("Général"),
+                          "Informations mise à jour avec succès !");
 }

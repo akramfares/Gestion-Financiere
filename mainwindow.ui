@@ -539,7 +539,7 @@ aux Entités :</string>
        <string>Bienvenue dans l'espace d'administration</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_9">
+     <widget class="QLineEdit" name="password">
       <property name="geometry">
        <rect>
         <x>270</x>
@@ -549,7 +549,7 @@ aux Entités :</string>
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_10">
+     <widget class="QLineEdit" name="login">
       <property name="geometry">
        <rect>
         <x>270</x>

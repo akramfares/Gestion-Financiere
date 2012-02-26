@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialisation des combos
     Rubrique *r = new Rubrique("");
     r->initComboAll(ui->comboRubrique);
+
+    // Configuration du champ password
+    ui->password->setEchoMode(QLineEdit::Password);
 }
 
 MainWindow::~MainWindow()
@@ -158,6 +161,13 @@ void MainWindow::setTableRubrique(QString nom){
 
 void MainWindow::on_adminConnect_clicked()
 {
-    AdminDialog ad;
-    ad.exec();
+    General *general = new General();
+    if(general->checkConnexion(ui->login->text(),ui->password->text())){
+        AdminDialog ad;
+        ad.exec();
+    }
+    else {
+        QMessageBox::critical(0, QObject::tr("Général"),
+                              "Mauvais mot de passe !");
+    }
 }
