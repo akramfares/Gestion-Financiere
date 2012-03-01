@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -56,19 +56,6 @@
        <string>Rubrique :</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>80</y>
-        <width>121</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Responsable :</string>
-      </property>
-     </widget>
      <widget class="QComboBox" name="comboBox_3">
       <property name="geometry">
        <rect>
@@ -81,11 +68,6 @@
       <item>
        <property name="text">
         <string/>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Entite</string>
        </property>
       </item>
      </widget>
@@ -103,16 +85,6 @@
         <string/>
        </property>
       </item>
-     </widget>
-     <widget class="QComboBox" name="comboBox_5">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>80</y>
-        <width>141</width>
-        <height>22</height>
-       </rect>
-      </property>
      </widget>
      <widget class="QPushButton" name="pushButton_7">
       <property name="geometry">
@@ -144,9 +116,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>130</y>
+        <y>80</y>
         <width>591</width>
-        <height>151</height>
+        <height>201</height>
        </rect>
       </property>
      </widget>
@@ -548,6 +520,9 @@ aux Entités :</string>
         <height>20</height>
        </rect>
       </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_10">
       <property name="geometry">
@@ -608,34 +583,141 @@ aux Entités :</string>
     <property name="title">
      <string>Fichier</string>
     </property>
+    <addaction name="actionEnregistrer"/>
+    <addaction name="actionEnregistrer_sous"/>
+    <addaction name="separator"/>
+    <addaction name="actionImprimer"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter_3"/>
    </widget>
    <widget class="QMenu" name="menuEdition">
     <property name="title">
      <string>Edition</string>
     </property>
+    <addaction name="actionAnnuler"/>
+    <addaction name="actionCopeier"/>
+    <addaction name="actionColler"/>
    </widget>
-   <widget class="QMenu" name="menuA_Propos">
+   <widget class="QMenu" name="menu">
     <property name="title">
-     <string>A Propos</string>
+     <string>Affichage</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menuOutils">
-    <property name="title">
-     <string>Outils</string>
-    </property>
+    <widget class="QMenu" name="menuChanger_de_Theme">
+     <property name="title">
+      <string>Changer de Theme</string>
+     </property>
+     <addaction name="actionThem_euro"/>
+     <addaction name="actionTheme_couscous"/>
+     <addaction name="actionTheme100Drh"/>
+     <addaction name="actionTheme50dh"/>
+    </widget>
+    <addaction name="menuChanger_de_Theme"/>
+    <addaction name="actionChanger_la_couleur_de_l_arrier_plan"/>
+    <addaction name="actionChanger_la_couleur_de_texte"/>
+    <addaction name="actionChanger_la_couleur_du_texte"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
      <string>Aide</string>
     </property>
+    <addaction name="actionA_propos"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdition"/>
-   <addaction name="menuA_Propos"/>
-   <addaction name="menuOutils"/>
+   <addaction name="menu"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAnnuler">
+   <property name="text">
+    <string>Annuler</string>
+   </property>
+  </action>
+  <action name="actionCopeier">
+   <property name="text">
+    <string>Copier</string>
+   </property>
+  </action>
+  <action name="actionColler">
+   <property name="text">
+    <string>Coller</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer">
+   <property name="text">
+    <string>Enregistrer</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_sous">
+   <property name="text">
+    <string>Enregistrer sous</string>
+   </property>
+  </action>
+  <action name="actionImprimer">
+   <property name="text">
+    <string>Imprimer</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionCharger">
+   <property name="text">
+    <string>Charger</string>
+   </property>
+  </action>
+  <action name="actionChanger_la_couleur_de_l_arrier_plan">
+   <property name="text">
+    <string>Changer la couleur de l'arrier plan</string>
+   </property>
+  </action>
+  <action name="actionChanger_la_couleur_de_texte">
+   <property name="text">
+    <string>Changer la police du texte</string>
+   </property>
+  </action>
+  <action name="actionQuitter_2">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionA_propos">
+   <property name="text">
+    <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionQuitter_3">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionThem_euro">
+   <property name="text">
+    <string>them euro</string>
+   </property>
+  </action>
+  <action name="actionTheme_couscous">
+   <property name="text">
+    <string>theme couscous</string>
+   </property>
+  </action>
+  <action name="actionTheme100Drh">
+   <property name="text">
+    <string>theme100Drh</string>
+   </property>
+  </action>
+  <action name="actionTheme50dh">
+   <property name="text">
+    <string>theme50dh</string>
+   </property>
+  </action>
+  <action name="actionChanger_la_couleur_du_texte">
+   <property name="text">
+    <string>changer la couleur du texte</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
